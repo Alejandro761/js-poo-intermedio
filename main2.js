@@ -106,3 +106,21 @@ objChido.a = 'asi';
 objChido.c.d = 'simon';
 console.log(objChido);
 console.log(obj1);
+
+const studentBase = {
+    name: undefined,
+    email: undefined,
+    age: undefined,
+    approvedCourses: undefined,
+    learningPaths: undefined,
+    socialMedia: {
+        twitter: undefined,
+        facebook: undefined,
+    },
+};
+
+const juan = deepCopy(studentBase);
+
+Object.seal(juan); //para evitar que se eliminen sus propiedades
+Object.isSealed(juan); //da true si no se pueden borrar
+Object.isFrozen(juan); //da true si no se pueden borrar y si no se pueden editar
