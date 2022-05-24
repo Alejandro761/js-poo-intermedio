@@ -42,3 +42,22 @@ console.log(obj5);
 
 obj1.editA();
 console.log(obj5);
+
+
+
+let numeros = [1,9,4,6,1,8,6,5,3,8,2];
+
+for (let index = 0; index < numeros.length; index++) {
+    console.log(index, numeros[index]);
+}
+
+function recursiva(numerosArray) {
+    if(numerosArray.length != 0){
+        const firstNum = numerosArray[0];
+        console.log(firstNum);
+        numerosArray.shift(); //shift elimina el primer elemento
+        recursiva(numerosArray);
+    } 
+}
+
+recursiva(numeros); 
