@@ -131,8 +131,12 @@ function requiredParam(param) {
 function createStudent({
     name = requiredParam('name'), age, email = requiredParam('email'), twitter, facebook, instagram, learningPaths = [], approvedCourses = [],
 } = {} /* que por defecto lo que recibimos en un objeto vacio */) {
-    return {
-        name, 
+
+    const private = {
+        '_name': name,
+    };
+
+    const public = {
         age, 
         email,
         socialMedia: {
@@ -141,8 +145,36 @@ function createStudent({
             instagram,
         },
         learningPaths,
-        approvedCourses
+        approvedCourses,
+        
+        get name() {
+           return private['_name'];
+        },
+        
+        set name(newName){
+            if(newName.length > 0){
+                private['_name'] = newName;
+            } else {
+                console.warn('Tu nombre debe tener al menos 1 carácter');
+            }
+        },
+        // readName() {
+        //     return private._name;
+        // },
+        // changeName(newName){
+        //     private._name = newName;
+        // },
     };
+
+    Object.defineProperties(public, 'readName', {
+        configurable: false, writable: false
+    });
+
+    Object.defineProperties(public, 'changeName', {
+        configurable: false, writable: false
+    });
+
+    return public;
 }
 
 const juan = createStudent({
@@ -154,7 +186,6 @@ const juan = createStudent({
 
 console.log(juan);
 
-const juan2 = createStudent({
-});
+// const juan2 = createStudent({});
 
-console.log(juan2);
+// console.log(juan2); 
