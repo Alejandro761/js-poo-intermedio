@@ -119,8 +119,42 @@ const studentBase = {
     },
 };
 
-const juan = deepCopy(studentBase);
+// const juan = deepCopy(studentBase);
 
-Object.seal(juan); //para evitar que se eliminen sus propiedades
-Object.isSealed(juan); //da true si no se pueden borrar
-Object.isFrozen(juan); //da true si no se pueden borrar y si no se pueden editar
+// Object.seal(juan); //para evitar que se eliminen sus propiedades
+// Object.isSealed(juan); //da true si no se pueden borrar
+// Object.isFrozen(juan); //da true si no se pueden borrar y si no se pueden editar
+function requiredParam(param) {
+    throw new Error(param + " es obligatorio");
+}
+
+function createStudent({
+    name = requiredParam('name'), age, email = requiredParam('email'), twitter, facebook, instagram, learningPaths = [], approvedCourses = [],
+} = {} /* que por defecto lo que recibimos en un objeto vacio */) {
+    return {
+        name, 
+        age, 
+        email,
+        socialMedia: {
+            twitter,
+            facebook,
+            instagram,
+        },
+        learningPaths,
+        approvedCourses
+    };
+}
+
+const juan = createStudent({
+    name: 'juanito',
+    age: 18,
+    email: 'eljuan@simail.com',
+    twitter: 'elJuan',
+});
+
+console.log(juan);
+
+const juan2 = createStudent({
+});
+
+console.log(juan2);
